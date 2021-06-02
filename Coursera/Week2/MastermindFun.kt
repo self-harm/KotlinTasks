@@ -17,3 +17,8 @@ fun main(args: Array<String>) {
     evaluateGuess("AAAF", "ABCA") eq result
     evaluateGuess("ABCA", "AAAF") eq result
 }
+
+infix fun <T> T.eq(other: T) {
+    if (this == other) println("OK")
+    else println("Error: $this != $other")
+}
