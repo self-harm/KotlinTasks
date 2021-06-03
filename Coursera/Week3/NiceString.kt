@@ -1,5 +1,6 @@
 package nicestring
 
+//my solution
 fun String.isNice(): Boolean {
     var firstCondition = true
     var secondCondition = false
@@ -25,3 +26,15 @@ fun String.isNice(): Boolean {
         || (firstCondition && thirdCondition)
         || (secondCondition && thirdCondition)
 }
+
+//perfect solution - in functional style, more "kotlinish"
+fun String.isNice(): Boolean {
+    val noBadSubString = setOf("ba", "be", "bu").none { this.contains(it) }
+
+    val hasThreeVowels = count { it in "aeiou" } >= 3
+
+    val hasDouble = zipWithNext().any { it.first == it.second }
+
+    return listOf(noBadSubString, hasThreeVowels, hasDouble).count { it } >= 2
+}
+
