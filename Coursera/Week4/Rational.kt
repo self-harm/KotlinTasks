@@ -3,7 +3,6 @@ package rationals
 import java.lang.IllegalArgumentException
 import java.math.BigInteger
 
-
 fun main() {
     val half = 1 divBy 2
     val third = 1 divBy 3
@@ -38,6 +37,8 @@ fun main() {
             "1824032980372593840238402384283940832058".toBigInteger() == 1 divBy 2)
 }
 
+operator fun Pair<Rational, Rational>.contains(rational: Rational): Boolean = rational >= first && rational <= second
+
 infix fun Long.divBy(x: Long): Any {
     if (x == 0L) throw IllegalArgumentException()
     return Rational(this.toBigInteger(), x.toBigInteger())
@@ -55,19 +56,21 @@ infix fun BigInteger.divBy(x: BigInteger): Rational {
 
 fun String.toRational(): Rational {
     val arrOfStrings = this.split("/")
-    val numerator = arrOfStrings[0].toInt()
-    val denominator = arrOfStrings[1].toInt()
-    var gcd = 1
 
-    var i = 1
-    while (i <= numerator && i <= denominator) {
-        if (numerator % i == 0 && denominator % i == 0)
-            gcd = i
-        ++i
+    if (arrOfStrings.size == 1) return Rational(arrOfStrings[0].toBigInteger(), 1.toBigInteger())
+
+    var n = arrOfStrings[0].toBigInteger()
+    var d = arrOfStrings[1].toBigInteger()
+
+    if (n < BigInteger.ZERO && d < BigInteger.ZERO) {
+        n = n.abs()
+        d = d.abs()
+    } else if (d < BigInteger.ZERO) {
+        n = n.negate()
+        d = d.abs()
     }
 
-    return Rational(numerator.div(gcd).toBigInteger()
-            , denominator.div(gcd).toBigInteger())
+    return Rational(n, d)
 }
 
 class Rational(var n: BigInteger, var d: BigInteger) {
@@ -111,10 +114,12 @@ class Rational(var n: BigInteger, var d: BigInteger) {
         return Pair(this, rational)
     }
 
-    operator fun Pair<Rational, Rational>.contains(rational: Rational) = rational >= first && rational <= second
 
     override fun toString(): String {
-        return "$n/$d)"
+        var gcd = n.gcd(d)
+
+        if (n % d == BigInteger.ZERO) return "${n / d}"
+        return "${n / gcd}/${d / gcd}"
     }
 
 }
