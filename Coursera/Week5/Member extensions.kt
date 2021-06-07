@@ -8,6 +8,7 @@ class Words {
 
     operator fun String.unaryPlus() {
         list.add(this)
+        //record()
     }
 
     fun String.record() {
