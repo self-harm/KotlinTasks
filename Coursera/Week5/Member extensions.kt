@@ -6,14 +6,13 @@ package coursera
 class Words {
     private val list = mutableListOf<String>()
 
-//    private operator fun Words.unaryPlus() {
-//        TODO("Not yet implemented")
-//    }
-
     operator fun String.unaryPlus() {
-        TODO("Not yet implemented")
+        list.add(this)
     }
-    // TODO
+
+    fun String.record() {
+        list += this
+    }
 
     override fun toString() = list.toString()
 }
