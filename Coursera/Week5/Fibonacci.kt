@@ -16,9 +16,9 @@ fun fibonacci(): Sequence<Int> = sequence {
         b = sum
     }
     
-/*    solution from coursera
-    var elements = Pair(0, 1)
+/*  solution from coursera:
 
+    var elements = Pair(0, 1)
     while (true) {
         yield(elements.first)
         elements = Pair(
