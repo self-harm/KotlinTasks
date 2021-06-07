@@ -1,7 +1,19 @@
+package coursera
+
+//Write the code that the Kotlin compiler will generate while inlining the filter function (instead of calling it).
+//Note that the compiler generates Java bytecode, but for simplicity, write the similar code in Kotlin.
+//The simplified declaration of 'filter' is given below.
+
 fun filterNonZero(list: List<Int>) = list.filter { it != 0 }
 
 fun filterNonZeroGenerated(list: List<Int>): List<Int> {
-    TODO()
+    val destination = ArrayList<Int>()
+    for (element in list) {
+        if (element != 0) {
+            destination.add(element)
+        }
+    }
+    return destination
 }
 
 fun main(args: Array<String>) {
@@ -19,4 +31,9 @@ inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> {
         }
     }
     return destination
+}
+
+infix fun <T> T.eq(other: T) {
+    if (this == other) println("OK")
+    else println("Error: $this != $other")
 }
