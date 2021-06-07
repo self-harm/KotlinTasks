@@ -34,8 +34,8 @@ fun foo(x: X, y: Y?, z: Z) {
 //         }
 //     }
 y?.run {
-            start()
-            finish()
+        start()
+        finish()
     }
 
 
