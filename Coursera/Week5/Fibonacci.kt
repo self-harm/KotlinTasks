@@ -15,6 +15,17 @@ fun fibonacci(): Sequence<Int> = sequence {
         a = b
         b = sum
     }
+    
+/*    solution from coursera
+    var elements = Pair(0, 1)
+
+    while (true) {
+        yield(elements.first)
+        elements = Pair(
+            elements.second,
+            elements.first + elements.second
+        )
+    }*/
 }
 
 fun main(args: Array<String>) {
