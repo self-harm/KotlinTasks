@@ -35,7 +35,7 @@ fun newGameOfFifteen(initializer: GameOfFifteenInitializer = RandomGameInitializ
             with(board) {
                 when (direction) {
                     Direction.UP -> {
-                        if (board.getCellOrNull(nullCell.i + 1, nullCell.j) != null) {
+                        if (getCellOrNull(nullCell.i + 1, nullCell.j) != null) {
                             val t = get(getCell(nullCell.i + 1, nullCell.j))
                             set(nullCell, t)
                             set(getCell(nullCell.i + 1, nullCell.j), null)
